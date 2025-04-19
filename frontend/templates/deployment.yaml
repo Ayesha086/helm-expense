@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: expense
+  # these labels are expense resources
+  labels:
+    app: frontend
+    tier: web
+    project: expense
+spec:
+# modify replicas according to your case
+  replicas: 1
+  selector:
+  # replicaset use these labels to find the pods for creating desired number of replicas
+    matchLabels:
+      app: frontend
+      tier: web
+      project: expense
+  # pod template
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: web
+        project: expense
+    spec:   
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+      containers:
+       - name: nginx
+         image: ayeshacs540/frontend:{{ .Values.deployment.Version }}
+         ports:
+         - containerPort: 8080
+         volumeMounts:
+         - name: nginx
+           mountPath: /etc/nginx/nginx.conf
+           subPath:  nginx.conf 
+           readOnly: true
