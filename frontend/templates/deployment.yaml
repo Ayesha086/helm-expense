@@ -34,7 +34,7 @@ spec:
             path: nginx.conf
       containers:
       - name: nginx
-        image: ayeshacs540/frontend:{{ .Values.deployment.Version }}
+        image: ayeshacs540/frontend:{{ .Values.deployment.version }}
         resources:
         # soft limit
           requests:
