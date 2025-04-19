@@ -18,16 +18,16 @@ spec:
       tier: backend
       project: expense
   # pod template
-    template:
-      metadata:
-        labels:
-          app: backend
-          tier: backend
-          project: expense
-      spec:   
-        containers:
-        - name: nginx
-          image: ayeshacs540/backend:{{ .Values.deployment.version }}
-          envFrom:
-          - configMapRef:
-              name: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: backend
+        project: expense
+    spec:   
+      containers:
+      - name: nginx
+        image: ayeshacs540/backend:{{ .Values.deployment.version }}
+        envFrom:
+        - configMapRef:
+            name: backend
