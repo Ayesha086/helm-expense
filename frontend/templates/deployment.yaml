@@ -33,12 +33,21 @@ spec:
           - key: nginx.conf
             path: nginx.conf
       containers:
-       - name: nginx
-         image: ayeshacs540/frontend:{{ .Values.deployment.Version }}
-         ports:
-         - containerPort: 8080
-         volumeMounts:
-         - name: nginx
-           mountPath: /etc/nginx/nginx.conf
-           subPath:  nginx.conf 
-           readOnly: true
+      - name: nginx
+        image: ayeshacs540/frontend:{{ .Values.deployment.Version }}
+        resources:
+        # soft limit
+          requests:
+            memory: "68Mi"
+            cpu: "100m"
+         # hard limit
+          limits:
+            memory: "68Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8080
+          volumeMounts:
+          - name: nginx
+            mountPath: /etc/nginx/nginx.conf
+            subPath:  nginx.conf 
+            readOnly: true
