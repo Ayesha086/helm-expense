@@ -14,20 +14,20 @@ spec:
   selector:
   # replicaset use these labels to find the pods for creating desired number of replicas
     matchLabels:
-     app: backend
-     tier: backend
-     project: expense
+      app: backend
+      tier: backend
+      project: expense
   # pod template
-  template:
-    metadata:
-      labels:
-        app: backend
-        tier: backend
-        project: expense
-    spec:   
-      containers:
-      - name: nginx
-        image: ayeshacs540/backend:{{ .Values.deployment.version }}
-        envFrom:
-        - configMapRef:
-            name: backend
+    template:
+      metadata:
+        labels:
+          app: backend
+          tier: backend
+          project: expense
+      spec:   
+        containers:
+        - name: nginx
+          image: ayeshacs540/backend:{{ .Values.deployment.version }}
+          envFrom:
+          - configMapRef:
+              name: backend
