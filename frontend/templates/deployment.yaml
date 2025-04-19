@@ -24,26 +24,26 @@ spec:
         app: frontend
         tier: web
         project: expense
-  spec:   
-    volumes:
-    - name: nginx
-      configMap:
-        name: nginx
-        items:
-        - key: nginx.conf
-          path: nginx.conf
-    containers:
-    - name: nginx
-      image: ayeshacs540/frontend:{{ .Values.deployment.version }}
-      resources:
+    spec:   
+      volumes:
+      - name: nginx
+        configMap:
+          name: nginx
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+      containers:
+      - name: nginx
+        image: ayeshacs540/frontend:{{ .Values.deployment.version }}
+        resources:
       # soft limit
-        requests:
-          memory: "68Mi"
-          cpu  : "100m"
+          requests:
+            memory: "68Mi"
+            cpu  : "100m"
          # hard limit
-        limits:
-          memory: "68Mi"
-          cpu: "100m"
+          limits:
+            memory: "68Mi"
+            cpu: "100m"
       ports:
       - containerPort: 8080
         volumeMounts:
